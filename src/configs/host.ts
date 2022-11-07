@@ -5,14 +5,14 @@ export default {
   },
   development: {
     // 开发环境接口请求
-    API: 'http://dangerous_stocks:8000',
+    API: '/api/',
   },
   test: {
     // 测试环境接口地址
-    API: 'http://dangerous_stocks:8000',
+    API: '/api/',
   },
   production: {
     // 正式环境接口地址
-    API: 'http://dangerous_stocks:8000',
+    API: '/api/',
   },
 };
