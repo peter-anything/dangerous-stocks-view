@@ -1,3 +1,3 @@
 FROM nginx
 RUN mkdir -p /web/logs
-COPY dist /web/
+ADD dist/ dist /web/dist/
