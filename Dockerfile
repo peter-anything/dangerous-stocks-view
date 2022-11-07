@@ -1,2 +1,3 @@
 FROM nginx
-COPY dist /usr/share/nginx/html
+RUN mkdir -p /web/logs
+COPY dist /web/
