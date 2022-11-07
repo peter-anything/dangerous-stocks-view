@@ -29,7 +29,7 @@ interface IParams {
 }
 
 export const getMyStockList = async (params: IParams) => {
-  const result = await request.get<IMyStockResult>('/personal_stock/my_stocks/', { params });
+  const result = await request.get<IMyStockResult>('/stock/my_stocks/', { params });
 
   // 模拟接口分页
   let list = result?.data?.list || [];
