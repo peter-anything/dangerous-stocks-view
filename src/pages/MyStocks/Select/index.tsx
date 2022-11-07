@@ -73,69 +73,69 @@ export const SelectTable = () => {
           },
           {
             align: 'left',
-            width: 200,
+            width: 130,
             ellipsis: true,
             colKey: 'code',
-            title: '股票代码',
+            title: '股票名称',
             cell({ col, row }) {
-              return <Link theme="success" href={row['detailUrl']} target='_blank'>{row['code']}</Link>;
+              return <Link theme="success" href={row['detailUrl']} target='_blank'>{row['name']}</Link>;
+            },
+          },
+          {
+            align: 'left',
+            width: 240,
+            ellipsis: true,
+            colKey: 'buyPrice',
+            title: '成本价/现价/差额/收益率',
+            cell({ col, row }) {
+              const redStyle = {'color': 'red'};
+              const greenStyle = {'color': 'green'}
+              return <div>
+                {row['buyPrice']}/{row['now']}/{row['balance'].toFixed(3)}/<span style={row['balance'] > 0 ? redStyle : greenStyle }>{row['roi']}</span>
+              </div>
             },
           },
           {
             align: 'left',
             width: 200,
             ellipsis: true,
-            colKey: 'name',
-            title: '股票名称',
-          },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
-            colKey: 'roi',
-            title: '收益率',
-          },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
-            colKey: 'buyPrice',
-            title: '成本价',
-          },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
-            colKey: 'now',
-            title: '现价',
-          },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
             colKey: 'safePrice',
-            title: '安全价',
+            title: '现价/安全价/差额',
+            cell({ col, row }) {
+              const redStyle = {'color': 'red'};
+              const greenStyle = {'color': 'green'}
+              return <div>
+                {row['now']}/{row['safePrice']}/<span style={row['safeBalance'] > 0 ? redStyle : greenStyle }>{row['roi']}</span>
+              </div>
+            },
           },
           {
             align: 'left',
             width: 200,
             ellipsis: true,
             colKey: 'open',
-            title: '开盘价',
+            title: '理想压力位',
+            cell({ col, row }) {
+              const redStyle = {'color': 'red'};
+              const greenStyle = {'color': 'green'}
+              return <div>
+                {row['pressurePrices'][0]}/<span style={redStyle}>{row['pressurePrices'][1]}</span>/{row['pressurePrices'][2]}/<span style={redStyle}>{row['pressurePrices'][3]}</span>/{row['pressurePrices'][4]}
+              </div>
+            },
           },
           {
             align: 'left',
             width: 200,
             ellipsis: true,
-            colKey: 'high',
-            title: '最高价',
-          },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
-            colKey: 'low',
-            title: '最低价',
+            colKey: 'open',
+            title: '开盘/最高/最低',
+            cell({ col, row }) {
+              const redStyle = {'color': 'red'};
+              const greenStyle = {'color': 'green'}
+              return <div>
+                {row['open']}/{row['high']}/{row['low'].toFixed(3)}
+              </div>
+            },
           },
           {
             align: 'left',
