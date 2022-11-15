@@ -61,16 +61,27 @@ export const SelectTable = () => {
 
   return (
     <>
+    <Row justify='start' style={{ marginBottom: '20px' }}>
+        <SearchForm
+          onSubmit={async (value) => {
+            console.log('real')
+            dispatch(
+              getList({
+                pageSize: pageState.pageSize,
+                current: 1,
+                code: value.code,
+                name: value.name,
+                turnoverRate: value.turnoverRate
+              }),
+            );
+          }}
+          onCancel={() => {}}
+        />
+      </Row>
       <Table
         loading={loading}
         data={mystockList}
         columns={[
-          {
-            colKey: 'row-select',
-            fixed: 'left',
-            type: 'multiple',
-            // width: 50,
-          },
           {
             align: 'left',
             width: 130,
@@ -78,7 +89,11 @@ export const SelectTable = () => {
             colKey: 'code',
             title: '股票名称',
             cell({ col, row }) {
-              return <Link theme="success" href={row['detailUrl']} target='_blank'>{row['name']}</Link>;
+              const alertStyle1 = {'background': 'red', 'textAlign': 'center'}
+              const alertStyle2 = {'background': 'green',  'textAlign': 'center'}
+              return <div style={row['needAlert'] ? alertStyle1 : alertStyle2 }>
+                <Link theme="success" href={row['detailUrl']} target='_blank'>{row['name']}</Link>;
+              </div>
             },
           },
           {
@@ -127,7 +142,7 @@ export const SelectTable = () => {
             align: 'left',
             width: 200,
             ellipsis: true,
-            colKey: 'open',
+            colKey: 'close',
             title: '开盘/最高/最低',
             cell({ col, row }) {
               const redStyle = {'color': 'red'};
@@ -148,7 +163,7 @@ export const SelectTable = () => {
             align: 'left',
             width: 200,
             ellipsis: true,
-            colKey: 'createdAt',
+            colKey: 'buyDate',
             title: '时间',
           },
         ]}

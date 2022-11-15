@@ -21,6 +21,7 @@ export interface IMyStock {
   balance: number;
   detailUrl: string;
   pressurePrices: Array<number>;
+  needAlert: boolean;
 }
 
 interface IMyStockResult {

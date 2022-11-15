@@ -12,6 +12,19 @@ export const CONTRACT_STATUS = {
   FINISH: 4,
 };
 
+// 合同状态枚举
+export const MY_STOCK_STATUS = {
+  ALL: 0,
+  VALID: 1,
+  INVALID: 2
+};
+
+export const MY_STOCK_STATUS_OPTIONS: Array<IOption> = [
+  { value: MY_STOCK_STATUS.ALL, label: '所有持仓' },
+  { value: MY_STOCK_STATUS.VALID, label: '当前持有' },
+  { value: MY_STOCK_STATUS.INVALID, label: '历史持有' },
+];
+
 export const CONTRACT_STATUS_OPTIONS: Array<IOption> = [
   { value: CONTRACT_STATUS.FAIL, label: '审核失败' },
   { value: CONTRACT_STATUS.AUDIT_PENDING, label: '待审核' },

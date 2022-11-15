@@ -1,6 +1,6 @@
 import React, { useRef, memo } from 'react';
 import { Row, Col, Form, Input, Button, MessagePlugin, Select, RangeInput } from 'tdesign-react';
-import { CONTRACT_STATUS_OPTIONS, CONTRACT_TYPE_OPTIONS } from '../consts';
+import { MY_STOCK_STATUS_OPTIONS, CONTRACT_TYPE_OPTIONS } from '../consts';
 import { FormInstanceFunctions, SubmitContext } from 'tdesign-react/es/form/type';
 
 const { FormItem } = Form;
@@ -37,19 +37,9 @@ const SearchForm: React.FC<SearchFormProps> = (props) => {
         <Row>
           <Col flex='1'>
             <Row gutter={[16, 16]}>
-              <Col span={3} xs={12} sm={6} xl={3}>
-                <FormItem label='股票代码' name='code'>
-                  <Input placeholder='请输入股票代码' />
-                </FormItem>
-              </Col>
-              <Col span={3} xs={12} sm={6} xl={3}>
-                <FormItem label='股票名称' name='name'>
-                  <Input placeholder='请输入股票名称' />
-                </FormItem>
-              </Col>
-              <Col span={3} xs={12} sm={6} xl={3}>
-                <FormItem label='换手率' name='turnoverRate'>
-                  <RangeInput placeholder='请输入换手率' />
+              <Col span={3} xs={12} sm={6} xl={12}>
+                <FormItem label='持仓状态' name='status'>
+                  <Select options={MY_STOCK_STATUS_OPTIONS} placeholder='请选择持仓状态' />
                 </FormItem>
               </Col>
             </Row>

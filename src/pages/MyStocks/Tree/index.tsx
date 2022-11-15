@@ -15,7 +15,7 @@ import MyStockFormWithPopup from '../Select/components/MyStockFormWithPopup';
 const TreeTable: React.FC = () => (
   <div className={classnames(CommonStyle.pageWithColor, Style.content)}>
     <div className={Style.tableContent}>
-      <MyStockFormWithPopup />
+      {/* <MyStockFormWithPopup /> */}
       <SelectTable />
     </div>
 
