@@ -92,7 +92,7 @@ export const SelectTable = () => {
               const alertStyle1 = {'background': 'red', 'textAlign': 'center'}
               const alertStyle2 = {'background': 'green',  'textAlign': 'center'}
               return <div style={row['needAlert'] ? alertStyle1 : alertStyle2 }>
-                <Link theme="success" href={row['detailUrl']} target='_blank'>{row['name']}</Link>;
+                <Link theme="success" href={row['detailUrl']} target='_blank'>{row['name']}</Link>
               </div>
             },
           },
