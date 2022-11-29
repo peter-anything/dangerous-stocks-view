@@ -26,9 +26,14 @@ const result: IRouter[] = [
         meta: { title: '我的持仓' },
       },
       {
-        path: 'mystockADD',
-        Component: lazy(() => import('pages/MyStocks/Tree')),
-        meta: { title: '添加自选股' },
+        path: 'recommendStock',
+        Component: lazy(() => import('pages/RecommendStocks/Tree')),
+        meta: { title: '推荐股票' },
+      },
+      {
+        path: 'recommendIndustry',
+        Component: lazy(() => import('pages/RecommendIndustries/Tree')),
+        meta: { title: '推荐行业' },
       },
     ],
   },

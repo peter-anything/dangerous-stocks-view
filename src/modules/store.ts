@@ -9,6 +9,8 @@ import listCard from './list/card';
 import listStockFundamentalSelect from './stock_fundamental/select'
 import listMyStockSelect from './my_stock/select'
 import listStockSelect from './stock/select'
+import listRecommendStockSelect from './recommend_stock/select'
+import listRecommendIndustrySelect from './recommend_industry/select'
 
 const reducer = combineReducers({
   global,
@@ -18,6 +20,8 @@ const reducer = combineReducers({
   listCard,
   listStockFundamentalSelect,
   listMyStockSelect,
+  listRecommendStockSelect,
+  listRecommendIndustrySelect,
   listStockSelect
 });
 
