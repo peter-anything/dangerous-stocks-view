@@ -108,15 +108,22 @@ export const SelectTable = () => {
           },
           {
             align: 'left',
+            width: 130,
+            ellipsis: true,
+            colKey: 'marketValue',
+            title: '市值'
+          },
+          {
+            align: 'left',
             width: 200,
             ellipsis: true,
             colKey: 'close',
-            title: '开盘/收盘/高开',
+            title: '开盘/收盘/高开/现价',
             cell({ col, row }) {
               const redStyle = {'color': 'red'};
               const greenStyle = {'color': 'green'}
               return <div>
-                {row['open']}/{row['close']}/<span style={row['openHighRate'] > 0 ? redStyle : greenStyle }>{row['openHighRate'].toFixed(2)}</span>
+                {row['open']}/{row['close']}/<span style={row['openHighRate'] > 0 ? redStyle : greenStyle }>{row['openHighRate'].toFixed(2)}</span>/<span style={row['nowGrowthRate'] > 0 ? redStyle : greenStyle }>{row['nowGrowthRate'].toFixed(2)}</span>
               </div>
             },
           }

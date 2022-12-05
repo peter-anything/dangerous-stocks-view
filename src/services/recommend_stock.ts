@@ -13,6 +13,8 @@ export interface IRecommendStock {
   openHighRate: number;
   detailUrl: string;
   closeMoney: string;
+  nowGrowthRate: number;
+  marketValue: number;
 }
 
 interface IRecommendStockResult {
