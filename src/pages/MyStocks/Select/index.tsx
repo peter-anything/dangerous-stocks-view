@@ -101,40 +101,12 @@ export const SelectTable = () => {
             width: 240,
             ellipsis: true,
             colKey: 'buyPrice',
-            title: '成本价/现价/差额/收益率',
+            title: '成本价/现价/差额/收益率/收益',
             cell({ col, row }) {
               const redStyle = {'color': 'red'};
               const greenStyle = {'color': 'green'}
               return <div>
                 {row['buyPrice']}/{row['now']}/{row['balance'].toFixed(3)}/<span style={row['balance'] > 0 ? redStyle : greenStyle }>{row['roi']}</span>
-              </div>
-            },
-          },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
-            colKey: 'safePrice',
-            title: '现价/安全价/差额',
-            cell({ col, row }) {
-              const redStyle = {'color': 'red'};
-              const greenStyle = {'color': 'green'}
-              return <div>
-                {row['now']}/{row['safePrice']}/<span style={row['safeBalance'] > 0 ? redStyle : greenStyle }>{row['roi']}</span>
-              </div>
-            },
-          },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
-            colKey: 'open',
-            title: '理想压力位',
-            cell({ col, row }) {
-              const redStyle = {'color': 'red'};
-              const greenStyle = {'color': 'green'}
-              return <div>
-                {row['pressurePrices'][0]}/<span style={redStyle}>{row['pressurePrices'][1]}</span>/{row['pressurePrices'][2]}/<span style={redStyle}>{row['pressurePrices'][3]}</span>/{row['pressurePrices'][4]}
               </div>
             },
           },

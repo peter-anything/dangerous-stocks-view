@@ -11,6 +11,7 @@ import listMyStockSelect from './my_stock/select'
 import listStockSelect from './stock/select'
 import listRecommendStockSelect from './recommend_stock/select'
 import listRecommendIndustrySelect from './recommend_industry/select'
+import listManualRecommendStockSelect from './manual_recommend_stock/select'
 
 const reducer = combineReducers({
   global,
@@ -21,6 +22,7 @@ const reducer = combineReducers({
   listStockFundamentalSelect,
   listMyStockSelect,
   listRecommendStockSelect,
+  listManualRecommendStockSelect,
   listRecommendIndustrySelect,
   listStockSelect
 });

@@ -2,7 +2,7 @@ import React, { useState, memo, useEffect } from 'react';
 import { Table, Dialog, Button, Row, Col, Link, Input, Space, Popup  } from 'tdesign-react';
 import { ChevronUpCircleIcon, SearchIcon, ChevronDownCircleIcon } from 'tdesign-icons-react';
 import { useAppDispatch, useAppSelector } from 'modules/store';
-import { selectListSelect, getList, clearPageState } from 'modules/recommend_stock/select';
+import { selectListSelect, getList, clearPageState } from 'modules/manual_recommend_stock/select';
 import SearchForm from './components/SearchForm';
 import { StatusMap, ContractTypeMap, PaymentTypeMap } from '../Base';
 
@@ -16,7 +16,7 @@ export const SelectTable = () => {
   const pageState = useAppSelector(selectListSelect);
   const [selectedRowKeys, setSelectedRowKeys] = useState<(string | number)[]>([0, 1]);
   const [visible, setVisible] = useState(false);
-  const { loading, mystockList, current, pageSize, total } = pageState;
+  const { loading, myManualstockList, current, pageSize, total } = pageState;
 
 
   useEffect(() => {
@@ -26,6 +26,15 @@ export const SelectTable = () => {
         current: pageState.current,
       }),
     );
+
+    setInterval(() => {
+      dispatch(
+        getList({
+          pageSize: pageState.pageSize,
+          current: pageState.current,
+        }),
+      );
+    }, 3000);
 
     return () => {
       dispatch(clearPageState());
@@ -71,56 +80,25 @@ export const SelectTable = () => {
       </Row>
       <Table
         loading={loading}
-        data={mystockList}
+        data={myManualstockList}
         columns={[
           {
             align: 'left',
-            width: 130,
+            width: 100,
             ellipsis: true,
             colKey: 'code',
             title: '股票名称',
             cell({ col, row }) {
-              return <div>
+              const alertStyle1 = {'background': 'red', 'textAlign': 'center'}
+              const alertStyle2 = {'background': 'green',  'textAlign': 'center'}
+              return <div style={row['needAlert'] == 1 ? alertStyle1 : alertStyle2 }>
                 <Link theme="success" href={row['detailUrl']} target='_blank'>{row['name']}</Link>
               </div>
             },
           },
           {
             align: 'left',
-            width: 130,
-            ellipsis: true,
-            colKey: 'closeMoney',
-            title: '封单额'
-          },
-          {
-            align: 'left',
-            width: 130,
-            ellipsis: true,
-            colKey: 'industry',
-            title: '所属行业'
-          },
-          {
-            align: 'left',
-            width: 130,
-            ellipsis: true,
-            colKey: 'concepts',
-            title: '所属概念'
-          },
-          {
-            align: 'left',
-            width: 130,
-            ellipsis: true,
-            colKey: 'marketValue',
-            title: '市值',
-            cell({ col, row }) {
-              return <div>
-                <span>{row['marketValue']}亿</span>
-              </div>
-            },
-          },
-          {
-            align: 'left',
-            width: 200,
+            width: 150,
             ellipsis: true,
             colKey: 'close',
             title: '开盘/收盘/高开/现价',
@@ -128,10 +106,41 @@ export const SelectTable = () => {
               const redStyle = {'color': 'red'};
               const greenStyle = {'color': 'green'}
               return <div>
-                {row['open']}/{row['close']}/<span style={row['openHighRate'] > 0 ? redStyle : greenStyle }>{row['openHighRate'].toFixed(2)}</span>/<span style={row['nowGrowthRate'] > 0 ? redStyle : greenStyle }>{row['nowGrowthRate'].toFixed(2)}</span>
+                {row['open']}/{row['close']}/<span style={row['openHighRate'] > 0 ? redStyle : greenStyle }>{row['openHighRate'].toFixed(2)}%</span>/<span style={row['nowRate'] > 0 ? redStyle : greenStyle }>{row['nowRate'].toFixed(2)}%</span>
               </div>
             },
-          }
+          },
+          {
+            align: 'left',
+            width: 80,
+            ellipsis: true,
+            colKey: 'closeMoney',
+            title: '封单额',
+            cell({ col, row }) {
+              return <div>
+                <span>{row['closeMoney'].toFixed(2)}亿</span>
+              </div>
+            },
+          },
+          {
+            align: 'left',
+            width: 80,
+            ellipsis: true,
+            colKey: 'industry',
+            title: '所属行业'
+          },
+          {
+            align: 'left',
+            width: 160,
+            ellipsis: true,
+            colKey: 'marketValue',
+            title: '市值/流值/PE/换手率',
+            cell({ col, row }) {
+              return <div>
+                <span>{row['marketValue']}亿/{row['tradingMarketValue']}亿/{row['pe']}/{row['turnoverRate'].toFixed(2)}%</span>
+              </div>
+            },
+          },
         ]}
         rowKey='index'
         selectedRowKeys={selectedRowKeys}
