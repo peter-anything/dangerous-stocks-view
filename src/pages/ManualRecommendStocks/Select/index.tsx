@@ -98,17 +98,10 @@ export const SelectTable = () => {
           },
           {
             align: 'left',
-            width: 150,
+            width: 80,
             ellipsis: true,
-            colKey: 'close',
-            title: '开盘/收盘/高开/现价',
-            cell({ col, row }) {
-              const redStyle = {'color': 'red'};
-              const greenStyle = {'color': 'green'}
-              return <div>
-                {row['open']}/{row['close']}/<span style={row['openHighRate'] > 0 ? redStyle : greenStyle }>{row['openHighRate'].toFixed(2)}%</span>/<span style={row['nowRate'] > 0 ? redStyle : greenStyle }>{row['nowRate'].toFixed(2)}%</span>
-              </div>
-            },
+            colKey: 'industry',
+            title: '所属行业'
           },
           {
             align: 'left',
@@ -124,10 +117,17 @@ export const SelectTable = () => {
           },
           {
             align: 'left',
-            width: 80,
+            width: 150,
             ellipsis: true,
-            colKey: 'industry',
-            title: '所属行业'
+            colKey: 'close',
+            title: '开盘/收盘/高开/现价',
+            cell({ col, row }) {
+              const redStyle = {'color': 'red'};
+              const greenStyle = {'color': 'green'}
+              return <div>
+                {row['open']}/{row['close']}/<span style={row['openHighRate'] > 0 ? redStyle : greenStyle }>{row['openHighRate'].toFixed(2)}%</span>/<span style={row['nowRate'] > 0 ? redStyle : greenStyle }>{row['nowRate'].toFixed(2)}%</span>
+              </div>
+            },
           },
           {
             align: 'left',
