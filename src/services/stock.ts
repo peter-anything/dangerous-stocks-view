@@ -22,7 +22,7 @@ interface IParams {
   turnoverRateHigh?: string;
 }
 export const getStockList = async (params: IParams) => {
-  const result = await request.get<IStockResult>('/personal_stock/all_stocks/', { params });
+  const result = await request.get<IStockResult>('/stock/all_stocks/', { params });
 
   // 模拟接口分页
   let list = result?.data?.list || [];

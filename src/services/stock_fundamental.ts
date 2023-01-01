@@ -30,7 +30,7 @@ interface IParams {
 }
 
 export const getStockFundamentalList = async (params: IParams) => {
-  const result = await request.get<IStockFundamentalResult>('/personal_stock/all_stock_fundamentals/', { params });
+  const result = await request.get<IStockFundamentalResult>('/stock/all_stock_fundamentals/', { params });
 
   // 模拟接口分页
   let list = result?.data?.list || [];

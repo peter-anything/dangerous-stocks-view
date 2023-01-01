@@ -5,7 +5,7 @@ export default {
   },
   development: {
     // 开发环境接口请求
-    API: 'http://localhost:8000',
+    API: '/api/',
   },
   test: {
     // 测试环境接口地址

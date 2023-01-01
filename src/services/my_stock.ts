@@ -15,7 +15,13 @@ export interface IMyStock {
   createdAt: string;
   buyPrice: number;
   nowPrice: number;
+  safePrice: number;
+  safeBalance: number;
   roi: string;
+  balance: number;
+  detailUrl: string;
+  pressurePrices: Array<number>;
+  needAlert: boolean;
 }
 
 interface IMyStockResult {
@@ -29,11 +35,13 @@ interface IParams {
 }
 
 export const getMyStockList = async (params: IParams) => {
-  const result = await request.get<IMyStockResult>('/personal_stock/my_stocks/', { params });
+  const result = await request.get<IMyStockResult>('/stock/my_stocks/', { params });
 
   // 模拟接口分页
   let list = result?.data?.list || [];
   list.forEach((value, idx, arr) => {
+    value.balance = (value.now - value.buyPrice);
+    value.safeBalance = (value.now - value.safePrice);
     value.roi = (((value.now - value.buyPrice) / value.buyPrice) * 100).toFixed(3);
     arr[idx] = value;
   })

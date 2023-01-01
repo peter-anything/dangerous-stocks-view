@@ -61,81 +61,68 @@ export const SelectTable = () => {
 
   return (
     <>
+    <Row justify='start' style={{ marginBottom: '20px' }}>
+        <SearchForm
+          onSubmit={async (value) => {
+            console.log('real')
+            dispatch(
+              getList({
+                pageSize: pageState.pageSize,
+                current: 1,
+                code: value.code,
+                name: value.name,
+                turnoverRate: value.turnoverRate
+              }),
+            );
+          }}
+          onCancel={() => {}}
+        />
+      </Row>
       <Table
         loading={loading}
         data={mystockList}
         columns={[
           {
-            colKey: 'row-select',
-            fixed: 'left',
-            type: 'multiple',
-            // width: 50,
+            align: 'left',
+            width: 130,
+            ellipsis: true,
+            colKey: 'code',
+            title: '股票名称',
+            cell({ col, row }) {
+              const alertStyle1 = {'background': 'red', 'textAlign': 'center'}
+              const alertStyle2 = {'background': 'green',  'textAlign': 'center'}
+              return <div style={row['needAlert'] ? alertStyle1 : alertStyle2 }>
+                <Link theme="success" href={row['detailUrl']} target='_blank'>{row['name']}</Link>
+              </div>
+            },
           },
           {
             align: 'left',
-            width: 200,
+            width: 240,
             ellipsis: true,
-            colKey: 'code',
-            title: '股票代码',
+            colKey: 'buyPrice',
+            title: '成本价/现价/差额/收益率/收益',
             cell({ col, row }) {
-              return <Link theme="success" href={row['detailUrl']} target='_blank'>{row['code']}</Link>;
+              const redStyle = {'color': 'red'};
+              const greenStyle = {'color': 'green'}
+              return <div>
+                {row['buyPrice']}/{row['now']}/{row['balance'].toFixed(3)}/<span style={row['balance'] > 0 ? redStyle : greenStyle }>{row['roi']}</span>
+              </div>
             },
           },
           {
             align: 'left',
             width: 200,
             ellipsis: true,
-            colKey: 'name',
-            title: '股票名称',
-          },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
-            colKey: 'roi',
-            title: '收益率',
-          },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
-            colKey: 'buyPrice',
-            title: '成本价',
-          },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
-            colKey: 'now',
-            title: '现价',
-          },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
-            colKey: 'safePrice',
-            title: '安全价',
-          },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
-            colKey: 'open',
-            title: '开盘价',
-          },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
-            colKey: 'high',
-            title: '最高价',
-          },
-          {
-            align: 'left',
-            width: 200,
-            ellipsis: true,
-            colKey: 'low',
-            title: '最低价',
+            colKey: 'close',
+            title: '开盘/最高/最低',
+            cell({ col, row }) {
+              const redStyle = {'color': 'red'};
+              const greenStyle = {'color': 'green'}
+              return <div>
+                {row['open']}/{row['high']}/{row['low'].toFixed(3)}
+              </div>
+            },
           },
           {
             align: 'left',
@@ -148,7 +135,7 @@ export const SelectTable = () => {
             align: 'left',
             width: 200,
             ellipsis: true,
-            colKey: 'createdAt',
+            colKey: 'buyDate',
             title: '时间',
           },
         ]}

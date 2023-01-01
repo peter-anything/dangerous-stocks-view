@@ -15,7 +15,7 @@ interface IInitialState {
 const initialState: IInitialState = {
   loading: true,
   current: 1,
-  pageSize: 10,
+  pageSize: 100,
   total: 0,
   mystockList: [],
 };
