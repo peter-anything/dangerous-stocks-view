@@ -40,6 +40,16 @@ const result: IRouter[] = [
         Component: lazy(() => import('pages/RecommendIndustries/Tree')),
         meta: { title: '推荐行业' },
       },
+      {
+        path: 'stockReview',
+        Component: lazy(() => import('pages/StockReview/Tree')),
+        meta: { title: '股票复盘' },
+      },
+      {
+        path: 'stockReviewStatistics',
+        Component: lazy(() => import('pages/StockReviewStatistics/Tree')),
+        meta: { title: '股票复盘统计' },
+      },
     ],
   },
 ];
