@@ -22,6 +22,7 @@ export interface IMyStock {
   detailUrl: string;
   pressurePrices: Array<number>;
   needAlert: boolean;
+  closeMoney: number;
 }
 
 interface IMyStockResult {

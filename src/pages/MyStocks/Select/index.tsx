@@ -128,6 +128,20 @@ export const SelectTable = () => {
             align: 'left',
             width: 200,
             ellipsis: true,
+            colKey: 'closeMoney',
+            title: '封单额',
+            cell({ col, row }) {
+              const alertStyle1 = {'background': 'red', 'textAlign': 'center'}
+              const alertStyle2 = {'background': 'green',  'textAlign': 'center'}
+              return <div style={row['needAlert'] ? alertStyle1 : alertStyle2 }>
+                {row['closeMoney'].toFixed(3)}亿
+              </div>
+            },
+          },
+          {
+            align: 'left',
+            width: 200,
+            ellipsis: true,
             colKey: 'turnoverRate',
             title: '换手率',
           },
