@@ -23,9 +23,13 @@ const initialState: IInitialState = {
 interface IQueryParams {
   pageSize: number;
   current: number;
-  createdAt: string;
-  industry: string;
-  upLimitType: string;
+  createdAt?: string;
+  industry?: string;
+  upLimitType?: string;
+  name?: string;
+  orderBy?: string;
+  concept?: string;
+  recommend?: string;
 }
 
 export const getList = createAsyncThunk(
@@ -36,7 +40,11 @@ export const getList = createAsyncThunk(
       current: params.current,
       createdAt: params.createdAt,
       industry: params.industry,
-      upLimitType: params.upLimitType
+      upLimitType: params.upLimitType,
+      name: params.name,
+      orderBy: params.orderBy,
+      concept: params.concept,
+      recommend: params.recommend
     });
     return {
       list: result?.list,

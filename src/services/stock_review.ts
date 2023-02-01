@@ -29,9 +29,13 @@ interface IStockReviewResult {
 interface IParams {
   pageSize: number;
   current: number;
-  createdAt: string;
-  industry: string;
-  upLimitType: string;
+  createdAt?: string;
+  industry?: string;
+  upLimitType?: string;
+  name?: string;
+  orderBy?: string;
+  concept?: string;
+  recommend?: string;
 }
 
 export const getStockReviewList = async (params: IParams) => {

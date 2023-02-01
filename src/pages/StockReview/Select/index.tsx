@@ -52,20 +52,21 @@ export const SelectTable = () => {
 
   return (
     <>
-    <Row justify='start' style={{ marginBottom: '20px' }}>
+    <Row justify='start' style={{ margin: '0px' }}>
         <SearchForm
           onSubmit={async (value) => {
-            console.log('real')
+            console.log(value)
             dispatch(
               getList({
                 pageSize: pageState.pageSize,
                 current: 1,
-                code: value.code,
                 name: value.name,
-                turnoverRate: value.turnoverRate,
                 createdAt: value.createdAt,
                 upLimitType: value.upLimitType,
-                industry: value.industry
+                industry: value.industry,
+                orderBy: value.orderBy,
+                concept: value.concept,
+                recommend: value.recommend
               }),
             );
           }}
@@ -78,13 +79,25 @@ export const SelectTable = () => {
         columns={[
           {
             align: 'left',
-            width: 130,
+            width: 150,
             ellipsis: true,
             colKey: 'code',
             title: '股票名称',
             cell({ col, row }) {
               return <div>
-                <Link theme="success" href={row['detailUrl']} target='_blank'>{row['name']}</Link>
+                <Link theme="success" href={row['detailUrl']} target='_blank'>{row['name']}/{row['continuousUpLimitCount']}板</Link>
+              </div>
+            },
+          },
+          {
+            align: 'left',
+            width: 130,
+            ellipsis: true,
+            colKey: 'marketValue',
+            title: '市值',
+            cell({ col, row }) {
+              return <div>
+                <span>{row['marketValue']}亿</span>
               </div>
             },
           },
@@ -146,18 +159,6 @@ export const SelectTable = () => {
             ellipsis: true,
             colKey: 'concepts',
             title: '所属概念'
-          },
-          {
-            align: 'left',
-            width: 130,
-            ellipsis: true,
-            colKey: 'marketValue',
-            title: '市值',
-            cell({ col, row }) {
-              return <div>
-                <span>{row['marketValue']}亿</span>
-              </div>
-            },
           },
           {
             align: 'left',
